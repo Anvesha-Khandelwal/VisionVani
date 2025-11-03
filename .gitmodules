@@ -1,0 +1,3 @@
+[submodule "frontend/scope-converse"]
+	path = frontend/scope-converse
+	url = https://github.com/Anvesha-Khandelwal/scope-converse.git
