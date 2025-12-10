@@ -1,27 +1,120 @@
- VisionVani: The AI That Sees and Talks
- What Is It?
+VisionVani
 
-VisionVani is an innovative website where a chatbot doesn’t just talk — it actually sees!
-Using your webcam, the AI looks at the world around you in real-time and understands what it sees. Then, it chats with you and gives smart, helpful responses based on the objects it detects.
+VisionVani is a full-stack web application designed for scalable, modern development, with a structured frontend, backend, and real-time/chat capabilities. The project uses modern tooling like React, TypeScript, Tailwind CSS, and Supabase.
 
-It’s like having a virtual assistant with eyes and a brain — built using a mix of smart web tech and powerful Python AI tools.
+📁 Project Structure
+VisionVani/
+│
+├── backend/          # Backend services (APIs, logic, database handling)
+├── frontend/         # Main frontend application
+├── chat/             # Chat / realtime module
+│   ├── src/
+│   ├── public/
+│   ├── supabase/     # Supabase config & client
+│   └── node_modules/
+│
+├── .env              # Environment variables
+├── .gitignore
+├── index.html
+├── package.json
+├── package-lock.json
+├── bun.lockb
+├── tailwind.config.ts
+├── postcss.config.js
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── eslint.config.js
+├── components.json
+└── README.md
 
-How It Works (The Magic Behind It)
-The Eyes – Frontend (JavaScript)
+🚀 Tech Stack
+Frontend
 
-Your browser acts as the AI’s eyes. It uses your webcam to capture live video and sends snapshots to the server using a fast system called WebSockets.
+React
 
-The Brain – Backend (Python)
+TypeScript
 
-On the backend, a Python program (powered by OpenCV and other computer vision tools) analyzes the incoming images.
-It detects and identifies objects — for example, a “screwdriver,” “bottle,” or “keyboard” — and keeps track of what it sees.
+Tailwind CSS
 
-The Advisor – Chat Intelligence
+Vite
 
-When you type something like “How do I fix this?”, the AI doesn’t just look at your text.
-It also considers what it sees through the webcam — combining both to give you a smart, context-aware response.
+Backend
 
-Security and Personalization
+Node.js
 
-Before you start, you’ll need to log in — ensuring privacy and data protection.
-Plus, VisionVani can be tailored for different users or knowledge areas — whether it’s for engineering help, home repair, or learning support.
+Express (or similar framework)
+
+REST APIs
+
+Database & Auth
+
+Supabase (Auth, Database, Realtime)
+
+Tooling
+
+ESLint
+
+PostCSS
+
+Bun / npm
+
+⚙️ Setup Instructions
+1️⃣ Clone the repository
+git clone https://github.com/your-username/visionvani.git
+cd visionvani
+
+2️⃣ Install dependencies
+npm install
+
+
+or (if using bun)
+
+bun install
+
+3️⃣ Environment Variables
+
+Create a .env file in the root (and inside chat/ if needed):
+
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+▶️ Run the Project
+Frontend
+npm run dev
+
+Backend
+cd backend
+npm start
+
+Chat Module
+cd chat
+npm run dev
+
+✨ Features
+
+✅ Modular frontend & backend architecture
+
+✅ Real-time chat support
+
+✅ Authentication with Supabase
+
+✅ Responsive UI with Tailwind
+
+✅ Type-safe development using TypeScript
+
+✅ Scalable and clean codebase
+
+📌 Future Improvements
+
+Role-based authentication
+
+AI-powered chat enhancements
+
+Dashboard & analytics
+
+Deployment (Vercel / Netlify / AWS)
+
+📜 License
+
+This project is licensed under the MIT License.
