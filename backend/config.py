@@ -1,6 +1,8 @@
 import os
 from functools import lru_cache
-from pydantic import BaseSettings, AnyHttpUrl, Field, validator
+from pydantic import AnyHttpUrl, Field
+from pydantic_settings import BaseSettings
+from pydantic.functional_validators import field_validator
 
 
 class Settings(BaseSettings):
