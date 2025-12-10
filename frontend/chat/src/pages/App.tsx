@@ -32,7 +32,7 @@ const AppPage = () => {
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const analysisIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const analysisIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -51,7 +51,13 @@ const AppPage = () => {
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      if (analysisIntervalRef.current) {
+        clearInterval(analysisIntervalRef.current);
+      }
+      stopCamera();
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   const startCamera = async () => {
@@ -85,13 +91,16 @@ const AppPage = () => {
     }
     if (analysisIntervalRef.current) {
       clearInterval(analysisIntervalRef.current);
+      analysisIntervalRef.current = null;
     }
+    setIsAnalyzing(false);
     setCameraActive(false);
     setDetectedObjects([]);
   };
 
   const captureFrame = (): string | null => {
     if (!videoRef.current) return null;
+    if (videoRef.current.videoWidth === 0 || videoRef.current.videoHeight === 0) return null;
     
     const canvas = document.createElement('canvas');
     canvas.width = videoRef.current.videoWidth;
@@ -104,6 +113,9 @@ const AppPage = () => {
   };
 
   const startAnalysis = () => {
+    if (analysisIntervalRef.current) {
+      clearInterval(analysisIntervalRef.current);
+    }
     analysisIntervalRef.current = setInterval(async () => {
       const frame = captureFrame();
       if (!frame) return;
@@ -283,7 +295,7 @@ const AppPage = () => {
             <Input
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
               placeholder="Ask about what you see..."
               disabled={isSending}
               className="bg-muted/50 border-border/50"
