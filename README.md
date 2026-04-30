@@ -172,7 +172,7 @@ uvicorn app:app --reload --port 8000
 ```
 
 The API docs will be available at `http://localhost:8000/docs` (Swagger UI).
-
+<!-- 
 ---
 
 ## Deployment
@@ -278,7 +278,7 @@ Your database is already hosted on Supabase. A few things to configure for produ
 
 **4. Restore a paused project**
 
-If your project is on the free tier and has been inactive, it may be paused. Go to your [Supabase Dashboard](https://supabase.com/dashboard), find the project, and click **Restore Project**.
+If your project is on the free tier and has been inactive, it may be paused. Go to your [Supabase Dashboard](https://supabase.com/dashboard), find the project, and click **Restore Project**. -->
 
 ---
 
