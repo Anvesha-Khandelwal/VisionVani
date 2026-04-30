@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Ensure the backend directory is on the path when run from repo root
+sys.path.insert(0, os.path.dirname(__file__))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -13,20 +19,16 @@ def create_app() -> FastAPI:
         version=settings.api_version,
     )
 
-    # CORS for local/dev; set FRONTEND_ORIGIN env var for prod
     origins = []
     if settings.frontend_origin:
         origins.append(str(settings.frontend_origin))
     else:
-        # sensible dev default
-        origins.extend(
-            [
-                "http://localhost:5173",
-                "http://127.0.0.1:5173",
-                "http://localhost:3000",
-                "http://127.0.0.1:3000",
-            ]
-        )
+        origins.extend([
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:3000",
+        ])
 
     app.add_middleware(
         CORSMiddleware,
@@ -41,4 +43,3 @@ def create_app() -> FastAPI:
 
 
 app = create_app()
-
