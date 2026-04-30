@@ -1,18 +1,14 @@
-import os
 from functools import lru_cache
 from typing import Optional
-from pydantic import AnyHttpUrl, Field, field_validator
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    api_title: str = Field("VisionVani API", description="Service display name")
-    api_version: str = Field("0.1.0", description="Semantic version")
-    environment: str = Field("development", description="Environment name")
-    frontend_origin: Optional[str] = Field(
-        default=None,
-        description="Allowed origin for CORS; set to your frontend URL",
-    )
+    api_title: str = Field("VisionVani API")
+    api_version: str = Field("0.1.0")
+    environment: str = Field("development")
+    frontend_origin: Optional[str] = Field(default=None)
 
     @field_validator("frontend_origin", mode="before")
     @classmethod
@@ -29,5 +25,4 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Cached settings loader — reads config once per process."""
     return Settings()

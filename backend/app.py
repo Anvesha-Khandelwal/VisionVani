@@ -1,12 +1,14 @@
 import sys
 import os
 
-# Ensure the backend directory is on the path when run from repo root
-sys.path.insert(0, os.path.dirname(__file__))
+# Always add the directory containing this file to sys.path
+# This makes 'routes' and 'config' importable regardless of where uvicorn is launched from
+_here = os.path.dirname(os.path.abspath(__file__))
+if _here not in sys.path:
+    sys.path.insert(0, _here)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
 from config import get_settings
 from routes import router as api_router
 
